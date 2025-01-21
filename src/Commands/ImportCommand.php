@@ -46,8 +46,10 @@ class ImportCommand extends Command
         }
 
         if ($importBoth || $importItems) {
-            $itemClass::makeAllRecommendable();
-            $this->info('All ['.$itemClass.'] records have been imported.');
+            foreach($itemClass as $class) {
+                $class::makeAllRecommendable();
+                $this->info('All ['.$class.'] records have been imported.');
+            }
         }
 
         return self::SUCCESS;

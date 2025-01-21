@@ -27,7 +27,8 @@ class Entity
             $this->key = $entity->getKeyName();
             $this->type = match (true) {
                 $entity instanceof $userClass => self::USER,
-                $entity instanceof $itemClass => self::ITEM,
+                is_string($itemClass) && $entity instanceof $itemClass => self::ITEM,
+                is_array($itemClass) && collect($itemClass)->contains(fn($class) => $entity instanceof $class) => self::ITEM,
                 default => throw new UnhandledMatchError()
             };
         } else {
