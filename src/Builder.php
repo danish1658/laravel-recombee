@@ -186,6 +186,14 @@ class Builder
         return $this;
     }
 
+    public function recommendItemsForSegment(string $contextSegmentId = null, int $targetUserId = null): self
+    {
+        $this->param('contextSegmentId', $contextSegmentId);
+        $this->param('targetUserId', $targetUserId);
+        $this->action = ['get' => \Baron\Recombee\Actions\Recommendations\RecommendItemsToItemSegment::class];
+        return $this;
+    }
+
     public function views(): self
     {
         $this->action = $this->initiator->isUser()
