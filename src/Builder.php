@@ -381,6 +381,26 @@ class Builder
 
     protected function performAction(string $verb)
     {
-        return (new ($this->action[$verb])($this))->execute();
+
+        $apiResponse = (new ($this->action[$verb])($this))->execute();
+
+        if(config('recombee.response') == 'local' && is_object($apiResponse) && $verb == 'get') {
+            return $this->convertResponseToLocalModels($apiResponse);
+        }
+
+        return  $apiResponse;
+    }
+
+    protected function convertResponseToLocalModels($apiResponse): mixed
+    {
+        $itemIds = collect($apiResponse)->pluck('id');
+
+        $models = $itemIds->map(function ($itemId) {
+            $model = explode('-', $itemId);
+            $model = 'App\Models\\'.$model[1];
+            return $model::find($itemId);
+        });
+
+        return $models;
     }
 }

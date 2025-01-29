@@ -40,4 +40,7 @@ return [
     */
     'region' => env('RECOMBEE_REGION', 'us-west'),
 
+    'enabled' => env('RECOMBEE_ENABLED', true),
+    'response' => env('RECOMBEE_RESPONSE', 'local'),
+
 ];
