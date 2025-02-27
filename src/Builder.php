@@ -26,6 +26,11 @@ class Builder
 
     public function engine(): Engine
     {
+
+        if (!config('recombee.enabled')) {
+            throw new \Exception('Recombee is not enabled');
+        }
+        
         return $this->engine;
     }
 
