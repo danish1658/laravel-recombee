@@ -13,10 +13,20 @@ use Illuminate\Support\Collection as BaseCollection;
 
 trait Recommendable
 {
+    
     public static function bootRecommendable()
     {
-        (new static())->registerRecommendableMacros();
+        $class = static::class;
+    
+        BaseCollection::macro('recommendable', function () use ($class) {
+            return $class::makeRecommendable($this);
+        });
+    
+        BaseCollection::macro('unrecommendable', function () use ($class) {
+            return $class::removeFromRecommendable($this);
+        });
     }
+    
 
     public function registerRecommendableMacros()
     {
