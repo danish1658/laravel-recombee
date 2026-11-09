@@ -149,6 +149,26 @@ class Builder
         return $this;
     }
 
+    /**
+     * Request timeout in milliseconds, overriding the configured/SDK default.
+     */
+    public function timeout(int $milliseconds): self
+    {
+        $this->param('timeout', $milliseconds);
+
+        return $this;
+    }
+
+    /**
+     * Number of times to retry a read request that times out.
+     */
+    public function retries(int $times): self
+    {
+        $this->param('retries', $times);
+
+        return $this;
+    }
+
     public function take(int $limit): self
     {
         $this->param('count', $limit);

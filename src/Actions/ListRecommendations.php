@@ -11,6 +11,7 @@ use Recombee\RecommApi\Requests\RecommendNextItems;
 abstract class ListRecommendations extends Action
 {
     protected int $defaultCount = 25;
+    protected bool $retryOnTimeout = true;
     protected array $defaultOptions = [
         'returnProperties' => true,
     ];

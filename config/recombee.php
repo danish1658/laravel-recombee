@@ -40,6 +40,19 @@ return [
     */
     'region' => env('RECOMBEE_REGION', 'us-west'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Timeouts & Retries
+    |--------------------------------------------------------------------------
+    |
+    | Request timeout in milliseconds. Leave null to use the SDK's default
+    | for each request type (e.g. 3000 ms for recommendations). Retries are
+    | only applied to read requests (recommendations) that time out.
+    |
+    */
+    'timeout' => env('RECOMBEE_TIMEOUT'),
+    'retries' => env('RECOMBEE_RETRIES', 0),
+
     'enabled' => env('RECOMBEE_ENABLED', true),
     'response' => env('RECOMBEE_RESPONSE', 'local'),
 
